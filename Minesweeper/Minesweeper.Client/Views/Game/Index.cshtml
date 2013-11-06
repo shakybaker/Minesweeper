@@ -1,4 +1,4 @@
-﻿@model Minesweeper.Models.Grid
+﻿@model Minesweeper.Models.Game
 @{
     ViewBag.Title = "Game";
 }
@@ -10,6 +10,31 @@
     </div>
 
     <div class="col-md-4">
+        <table border="1">
+            <tr>
+                <th></th>
+                <th>0</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+            </tr>
+            @for (var i = 0; i < 8; i++)
+            {
+                <tr>
+                    <th>@i</th>
+                    @for (var j = 0; j < 8; j++)
+                    {
+                        var pos = (@Model.Grid[i, j] == "0") ? "" : @Model.Grid[i, j];
+                    <td>@pos</td>
+                    }
+                </tr>
+            }
+
+        </table>
     </div>
 
     <div class="col-md-4">

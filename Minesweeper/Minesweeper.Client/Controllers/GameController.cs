@@ -11,9 +11,11 @@ namespace Minesweeper.Client.Controllers
     {
         public ActionResult Index()
         {
-            var grid = new Game();
+            var game = new Game();
+            game.PlaceBombsOnGrid();
+            game.GenerateProximityNumbersOnGrid();
 
-            return View("Index", grid);
+            return View("Index", game);
         }
 	}
 }

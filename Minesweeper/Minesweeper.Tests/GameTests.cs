@@ -60,8 +60,61 @@ namespace Minesweeper.Tests
             game.Grid[7, 5] = "*";
             game.GenerateProximityNumbersOnGrid();
 
+            //multiple assertions == bad, but I think its ok in this case
             Assert.AreEqual("1", game.Grid[0, 1]);
+            Assert.AreEqual("1", game.Grid[0, 2]);
+            Assert.AreEqual("1", game.Grid[0, 3]);
+            Assert.AreEqual("1", game.Grid[0, 4]);
+            Assert.AreEqual("1", game.Grid[0, 5]);
+            Assert.AreEqual("1", game.Grid[0, 7]);
+
             Assert.AreEqual("2", game.Grid[1, 0]);
+            Assert.AreEqual("2", game.Grid[1, 1]);
+            Assert.AreEqual("1", game.Grid[1, 2]);
+            Assert.AreEqual("2", game.Grid[1, 4]);
+            Assert.AreEqual("2", game.Grid[1, 5]);
+            Assert.AreEqual("2", game.Grid[1, 6]);
+            Assert.AreEqual("1", game.Grid[1, 7]);
+
+            Assert.AreEqual("1", game.Grid[3, 0]);
+            Assert.AreEqual("1", game.Grid[3, 1]);
+            Assert.AreEqual("0", game.Grid[3, 2]);
+            Assert.AreEqual("1", game.Grid[3, 3]);
+            Assert.AreEqual("2", game.Grid[3, 4]);
+            Assert.AreEqual("2", game.Grid[3, 5]);
+            Assert.AreEqual("2", game.Grid[3, 6]);
+
+            Assert.AreEqual("1", game.Grid[4, 0]);
+            Assert.AreEqual("1", game.Grid[4, 1]);
+            Assert.AreEqual("0", game.Grid[4, 2]);
+            Assert.AreEqual("1", game.Grid[4, 3]);
+            Assert.AreEqual("1", game.Grid[4, 5]);
+            Assert.AreEqual("1", game.Grid[4, 6]);
+            Assert.AreEqual("1", game.Grid[4, 7]);
+
+            Assert.AreEqual("1", game.Grid[5, 1]);
+            Assert.AreEqual("0", game.Grid[5, 2]);
+            Assert.AreEqual("1", game.Grid[5, 3]);
+            Assert.AreEqual("1", game.Grid[5, 4]);
+            Assert.AreEqual("1", game.Grid[5, 5]);
+            Assert.AreEqual("0", game.Grid[5, 6]);
+            Assert.AreEqual("0", game.Grid[5, 7]);
+
+            Assert.AreEqual("2", game.Grid[6, 0]);
+            Assert.AreEqual("2", game.Grid[6, 1]);
+            Assert.AreEqual("1", game.Grid[6, 2]);
+            Assert.AreEqual("0", game.Grid[6, 3]);
+            Assert.AreEqual("1", game.Grid[6, 4]);
+            Assert.AreEqual("1", game.Grid[6, 5]);
+            Assert.AreEqual("1", game.Grid[6, 6]);
+            Assert.AreEqual("0", game.Grid[6, 7]);
+
+            Assert.AreEqual("1", game.Grid[7, 0]);
+            Assert.AreEqual("1", game.Grid[7, 2]);
+            Assert.AreEqual("0", game.Grid[7, 3]);
+            Assert.AreEqual("1", game.Grid[7, 4]);
+            Assert.AreEqual("1", game.Grid[7, 6]);
+            Assert.AreEqual("0", game.Grid[7, 7]);
         }
     }
 }

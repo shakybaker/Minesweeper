@@ -7,6 +7,18 @@ namespace Minesweeper.Models
 {
     public class Game
     {
+        public enum AdjacentCell
+        {
+            TopLeft,
+            TopMiddle,
+            TopRight,
+            MiddleLeft,
+            MiddleRight,
+            BottomLeft,
+            BottomMiddle,
+            BottomRight
+        }
+
         public string[,] Grid = { 
                            { "0", "0", "0", "0", "0", "0", "0", "0" }, 
                            { "0", "0", "0", "0", "0", "0", "0", "0" }, 
@@ -39,43 +51,33 @@ namespace Minesweeper.Models
 
         public void GenerateProximityNumbersOnGrid()
         {
-            for (var i = 0; i < 8; i++)
+            for (var row = 0; row < 8; row++)
             {
-                for (var j = 0; j < 8; j++)
+                for (var column = 0; column < 8; column++)
                 {
-                    if (Grid[i, j] != "*")
+                    if (Grid[row, column] != "*")
                     {
-                        try
-                        {
-                            if (Grid[i - 1, j - 1] == "*")
-                                IncrementNumber(i, j);
-                            if (Grid[i - 1, j] == "*")
-                                IncrementNumber(i, j);
-                            if (Grid[i - 1, j + 1] == "*")
-                                IncrementNumber(i, j);
-                            if (Grid[i, j - 1] == "*")
-                                IncrementNumber(i, j);
-                            if (Grid[i, j + 1] == "*")
-                                IncrementNumber(i, j);
-                            if (Grid[i + 1, j - 1] == "*")
-                                IncrementNumber(i, j);
-                            if (Grid[i + 1, j] == "*")
-                                IncrementNumber(i, j);
-                            if (Grid[i + 1, j + 1] == "*")
-                                IncrementNumber(i, j);
-                        }
-                        catch (IndexOutOfRangeException ex)
-                        {
-                            //do nothing
-                        }
+                        IncrementNumber(row, column, -1, -1); //top left
+                        IncrementNumber(row, column, -1, 0); //top middle
+                        IncrementNumber(row, column, -1, 1); //top right
+                        IncrementNumber(row, column, 0, -1); //middle left
+                        IncrementNumber(row, column, 0, 1); //middle right
+                        IncrementNumber(row, column, 1, -1); //bottom left
+                        IncrementNumber(row, column, 1, 0); //bottom middle
+                        IncrementNumber(row, column, 1, 1); //bottom right
                     }
                 }
             }
         }
 
-        private void IncrementNumber(int i, int j)
+        private void IncrementNumber(int currentRow, int currentCol, int rowAdjustBy, int colAdjustBy)
         {
-            Grid[i, j] = (int.Parse(Grid[i, j]) + 1).ToString();
+            int adjacentRow = currentRow + rowAdjustBy;
+            int adjacentCol = currentCol + colAdjustBy;
+
+            if ((adjacentRow >= 0 && adjacentRow <= 7) && (adjacentCol >= 0 && adjacentCol <= 7))
+                if (Grid[adjacentRow, adjacentCol] == "*")
+                    Grid[currentRow, currentCol] = (int.Parse(Grid[currentRow, currentCol]) + 1).ToString();
         }
 
         private int GetRandom()
